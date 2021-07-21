@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Job Application Tracker</title>
+
+    <link href="../static/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+      #jobAccordion {
+        width: 70%;
+        margin: 0 auto;
+      }
+    </style>
+  </head>
+  <body>
+
+    {% block navbar %}
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+        </div>
+      </div>
+    </nav>
+    {% endblock %}
+
+    {% block content %}
+    <div class="accordion" id="jobAccordion">
+        {% for job in jobs %}
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="heading{{ job.info.company }}">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ job.info.company }}" aria-expanded="true" aria-controls="collapse{{ job.info.company }}">
+                {{ job.info.company }}
+              </button>
+            </h2>
+            <div id="collapse{{ job.info.company }}" class="accordion-collapse collapse" aria-labelledby="heading{{ job.info.company }}" data-bs-parent="#jobAccordion">
+              <div class="accordion-body">
+                <form action="{{ url_for('editJob') }}" method="POST">
+                  {{ job.form.csrf_token }}
+                  
+                  <div class="form-group col-md-3">
+                    {{ job.form.role.label }}
+                    {{ job.form.role(class="form-control") }}
+                  </div>
+                  <div class="form-group col-md-3">
+                    {{ job.form.status.label }}
+                    {{ job.form.status(class="form-control") }}
+                  </div>
+                  <div class="form-group col-md-3">
+                    {{ job.form.location.label }}
+                    {{ job.form.location(class="form-control") }}
+                  </div>
+                  <div class="form-group col-md-6">
+                    {{ job.form.dateApplied.label }}
+                    {{ job.form.dateApplied(class="form-control") }}
+                  </div>
+                  <div class="form-group col-md-6">
+                    {{ job.form.dateReplied.label }}
+                    {{ job.form.dateReplied(class="form-control") }}
+                  </div>
+                  <div class="form-group col">
+                    {{ job.form.description.label }}
+                    {{ job.form.description(class="form-control") }}
+                  </div>
+                  <div class="form-group">
+                    {{ job.form.submit(class="btn btn-success") }}
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% endblock %}
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script   src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="../static/js/bootstrap.min.js"></script>
+  </body>
+</html>

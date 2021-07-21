@@ -1,0 +1,4 @@
+config.py
+mockdata.py
+static/*
+__pycache__/
