@@ -12,14 +12,14 @@ DB = MockDBHelper()
 
 @app.route('/')
 def index():
-    jobs = DB.get_all_jobs()
+    jobs = DB.getAllJobs()
     jobs = list(map(
         lambda job : {
             'info': job,
-            'form': JobDescriptionForm(MultiDict(job))
+            'form': JobDescriptionForm(formdata=MultiDict(job), disabled=True)
         },
         jobs))
-    return render_template('home.html', jobs=jobs)
+    return render_template('home.html', jobs=jobs, newJobForm=JobDescriptionForm(disabled=False))
 
 @app.route('/edit')
 def editJob():
