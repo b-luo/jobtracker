@@ -4,8 +4,8 @@ class MockDBHelper:
     def __init__(self):
         return
 
-   #def add_job(self):
-
+    def addJob(self, job_info):
+        MOCK_JOBS.append(job_info)
 
     def getAllJobs(self):
         return MOCK_JOBS
