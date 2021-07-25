@@ -4,6 +4,7 @@ from werkzeug.datastructures import MultiDict
 from mockdbhelper import MockDBHelper
 from forms import JobDescriptionForm, NewJobDescriptionForm
 from config import Config
+import json
 
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -34,7 +35,8 @@ def addJob():
             del job_info[key]
 
     DB.addJob(job_info)
-    return redirect(url_for('index'))
+    jobs = json.dumps(DB.getAllJobs())
+    return jobs
 
 if __name__ == '__main__':
     app.run(debug=True)
