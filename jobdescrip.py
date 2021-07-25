@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, url_for, redirect
 from werkzeug.datastructures import MultiDict
 
 from mockdbhelper import MockDBHelper
-from forms import JobDescriptionForm, JobDescriptionAddForm
+from forms import JobDescriptionForm, NewJobDescriptionForm
 from config import Config
 
 app = Flask(__name__)
@@ -19,7 +19,7 @@ def index():
             'form': JobDescriptionForm(formdata=MultiDict(job))
         },
         jobs))
-    return render_template('home.html', jobs=jobs, newJobForm=JobDescriptionAddForm())
+    return render_template('home.html', jobs=jobs, newJobForm=NewJobDescriptionForm())
 
 @app.route('/edit')
 def editJob():

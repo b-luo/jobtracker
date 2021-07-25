@@ -11,7 +11,7 @@ class JobDescriptionForm(FlaskForm):
     description = TextAreaField(label='Description', render_kw={'disabled': True})
     submit = SubmitField(label='Submit')
 
-class JobDescriptionAddForm(FlaskForm): 
+class NewJobDescriptionForm(FlaskForm): 
     company = StringField(label='Company', render_kw={'disabled': False})
     role = StringField(label='Role', render_kw={'disabled': False})
     status = StringField(label='Status', render_kw={'disabled': False})
