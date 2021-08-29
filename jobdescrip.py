@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, url_for, redirect
+from flask import Flask, render_template, request, url_for, redirect, Response
 from werkzeug.datastructures import MultiDict
 
 from mockdbhelper import MockDBHelper
@@ -34,9 +34,8 @@ def addJob():
         if key in job_info:
             del job_info[key]
 
-    DB.addJob(job_info)
-    jobs = json.dumps(DB.getAllJobs())
-    return jobs
+    inserted = DB.addJob(job_info)
+    return Response('OK')
 
 if __name__ == '__main__':
     app.run(debug=True)

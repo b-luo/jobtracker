@@ -6,6 +6,7 @@ class MockDBHelper:
 
     def addJob(self, job_info):
         MOCK_JOBS.append(job_info)
+        return True
 
     def getAllJobs(self):
         return MOCK_JOBS

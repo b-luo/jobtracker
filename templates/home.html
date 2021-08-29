@@ -19,17 +19,22 @@
     <script>
       window.onload = function() {
         let newJobForm = document.getElementById("newJobForm");
-        newJobForm.addEventListener('submit', function(event) {
+        newJobForm.addEventListener("submit", function(event) {
+          event.preventDefault();
           $.ajax({
             type: "POST",
             url: "{{ url_for('addJob') }}",
-            data: newJobForm.serialize(),
+            data: $("#newJobForm").serialize(),
             success: function(response) {
-              console.log(response);
+              if (response == "OK") {
+                alert("Successfully added job");
+                $("#jobAccordion").load(window.location.href + " #jobAccordion");
+                $("#staticBackdrop").modal("hide");
+              }
             }
-          });
+          })
         });
-      }
+	  }
     </script>
   </head>
   <body>
